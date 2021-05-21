@@ -59,10 +59,9 @@
 
 `git add .`
 
-`git commit -m "short description of the PR"`
+`git commit -m "TSC-[XXX]"`
 
 `git push origin TSC-[XXX]`
 
-### NOTE:
-In order to commit changes, please use the tags _fix_, _new_feature_ or _minor_change_ and describe the commit.
+When making the PR, add the following tags _fix_, _new_feature_ or _minor_change_ with a short description of the commit.
 
