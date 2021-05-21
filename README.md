@@ -6,7 +6,7 @@
  ##### https://www.udemy.com/course/python-complete-bootcamp-2019-learn-by-applying-knowledge
  
  
-#Projects:
+#  Projects:
 
 - [ ] 1- Dice Rolling Simulator
 
@@ -63,6 +63,6 @@
 
 `git push origin TSC-[XXX]`
 
-###NOTE:
+### NOTE:
 In order to commit changes, please use the tags _fix_, _new_feature_ or _minor_change_ and describe the commit.
 
