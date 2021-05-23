@@ -10,7 +10,7 @@
 
 - [ ] 1- Dice Rolling Simulator
 
-- [ ] 2- Dictonary
+- [x] 2- Dictonary @cruz636
 
 - [ ] 3- Hangman Game
 
