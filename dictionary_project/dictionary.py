@@ -4,7 +4,7 @@ import platform
 import os
 
 # load dictionary file
-data = json.load(open("C:/Users/Tomas/vscodeProjects/bootcampy_2021/dictionary_project/data.json"))
+data = json.load(open("data.json"))
 
 def clear():
     # in order to use the correct command
