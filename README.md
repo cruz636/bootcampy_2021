@@ -8,11 +8,11 @@
  
 #  Projects:
 
-- [ ] 1- Dice Rolling Simulator
+- [x] 1- Dice Rolling Simulator
 
 - [x] 2- Dictonary @cruz636
 
-- [ ] 3- Hangman Game
+- [x] 3- Hangman Game @tomasrom
 
 - [ ] 4- Tic Tac Toe
 
