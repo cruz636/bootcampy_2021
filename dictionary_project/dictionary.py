@@ -1,93 +1,38 @@
 import json
-import webbrowser
-import platform
 import os
+from difflib import get_close_matches
 
-# load dictionary file
-data = json.load(open("data.json"))
+dic = json.load(open("C:/Users/Tomas/vscodeProjects/aprendiendoconara/diccionario/data.json"))
+again = 'y'
 
-def clear():
-    # in order to use the correct command
-    # we need to know the s.o
-    system = platform.system()
+def closeMatches(word, lista):
+    condition = word in lista
+    while condition == False:
+        posibles = get_close_matches(word, lista)
+        print("Sorry, I couldn't find that word. Try one of the following: ")
+        for p in posibles:
+            print("  ->", p)
+        word = input("Type a word: ")
+        condition = word in lista
+    return word
 
-    if system == 'Windows':
-        # Windows
-        os.system("cls")
+def search_in_dic(word):
+    word = word.lower()
+    if word in dic.keys():
+        return dic[word]
     else:
-        # for Linux or MacOs
-        os.system("clear")
-
-def autocomplete(letters):
-    size = len(letters)
-    for word in data:
-        if word[0:size] == letters:
-            print(word)
-
-def main(first_time=True):
+        return dic[closeMatches(word, dic.keys())]
     
-    if first_time:
-        print(" AYE AYE Sailor! ")
-        print(" Search for any word in the ocean!")
-        print(" Enter a letter and press ENTER for suggestions")
-        print(" Then enter  . to set sail ( search for the word )")
-    
-    word = ''
-    while True:
-        print('\n')
-        input_word = input("search for a word: {}".format(word))
-        if input_word == ".":
-            # search for word
-            search(word)
-            break
-        word = word + input_word
-        clear()
-        print(" Enter . to set sail ( search for the word )")
-        
-        if(len(word) > 3):
-            print("\n ______________")
-            print("Suggestions")
-            autocomplete(letters=word)
-
-def search(word):
-    
-    if word == 'X':
-        print("good bye sailor!")
-        exit()
-    
-    if word == 'X captain':
-        url = "https://www.youtube.com/watch?v=SLiNQhQr4G4"
-        webbrowser.open(url, new=0, autoraise=True)
-        print("""
-               \_/
-                |._
-                |'."-._.-""--.-"-.__.-'/
-                |  \       .-.        (
-                |   |     (@.@)        )
-                |   |   '=.|m|.='     /
-                |  /    .='`"``=.    /
-                |.'                 (
-                |.-"-.__.-""-.__.-"-.)
-                |
-                |
-                |
-            Goodbye Pirate!
-              """)
-        exit()
-
-    try:
-        clear() 
-        print("Definition for `{}`".format(word))
-        print("\n")
-        word = word.lower()
-        print("".join(data[word]))
-        print("\n _____________________")
-        print("( enter X for closing ) \n")
-    except:
-        print("word not found \n")
-    
-    main(first_time=False)
-
-main()
-
-
+while again == 'y':
+    os.system('cls')
+    palabra_ingresada = input("Type a word: ")
+    definition = search_in_dic(palabra_ingresada)
+    if type(definition) == list:
+        for i in definition:
+            print("  ->", i)
+    else:
+        print("  ->", definition)
+    again = input("\nSearch again? [y/n] ")
+    if again == "n":
+        os.system('cls')
+        print("Gracias, vuelvas prontos.")
