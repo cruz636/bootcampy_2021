@@ -11,10 +11,10 @@ def clear_terminal():
         os.system('clear')
 
 def get_word():
-    index = random.randint(0,len(words))
+    index = random.randint(0, len(words))
     word = words[index]
     while len(word) <= 3:
-        index = random.randint(0,len(words))
+        index = random.randint(0, len(words))
         word = words[index]
     return word.lower()
 
@@ -43,40 +43,47 @@ hangman = {
     '7' :   "__________\n     \n      \n     \n     ",
 }         
 
-word = get_word()
-message = "Guess the word: "
-blank_spaces = ''
-used_letters = ''
-lives = 7
-for letter_index in word:
-    blank_spaces += '_'
+def play_hangman():
+    word = get_word()
+    message = "Guess the word: "
+    blank_spaces = ''
+    used_letters = ''
+    lives = 7
+    for letter_index in word:
+        blank_spaces += '_'
 
-while lives > 0 and word != blank_spaces.lower():
+    while lives > 0 and word != blank_spaces.lower():
+        clear_terminal()
+        print('Lives left:', lives)
+        print('Wrong letters:', used_letters)
+        print(hangman[str(lives)])
+        letter_typed = input(message + blank_spaces + '\n  -> ')
+        while len(letter_typed) != 1:
+            clear_terminal()
+            print('Lives left:', lives)
+            print('Wrong letters:', used_letters)
+            print(hangman[str(lives)])
+            letter_typed = input(message + blank_spaces + '\nONLY ONE CHARACTER PLS' + '\n  -> ')
+        letter_typed = letter_typed.lower()
+        if word.find(letter_typed) != -1:
+            blank_spaces = replace_blanks(letter_typed, word, blank_spaces)
+        else:
+            if used_letters.find(letter_typed.upper()) == -1:
+                lives -= 1
+                used_letters += letter_typed.upper() + ' '
+
     clear_terminal()
-    #print(word)
-    print('Lives left:', lives)
-    print('Wrong letters:', used_letters)
-    print(hangman[str(lives)])
-    letter_typed = input(message + blank_spaces + '\n  -> ')
-    letter_typed = letter_typed.lower()
-    if word.find(letter_typed) != -1:
-        blank_spaces = replace_blanks(letter_typed, word, blank_spaces)
+    if lives > 0:
+        print('Lives left:', lives)
+        print('Wrong letters:', used_letters)
+        print(hangman[str(lives)])
+        print(message + blank_spaces)
+        print("YOU WIN.")
     else:
-        if used_letters.find(letter_typed.upper()) == -1:
-            lives -= 1
-            used_letters += letter_typed.upper() + ' '
-    
-clear_terminal()
-if lives > 0:
-    print('Lives left:', lives)
-    print('Wrong letters:', used_letters)
-    print(hangman[str(lives)])
-    print(message + blank_spaces)
-    print("YOU WIN.")
-else:
-    print('Lives left:', lives)
-    print('Wrong letters:', used_letters)
-    print(hangman[str(lives)])
-    print("Word:", word)
-    print("YOU LOSE.")
-    
+        print('Lives left:', lives)
+        print('Wrong letters:', used_letters)
+        print(hangman[str(lives)])
+        print("Word:", word)
+        print("YOU LOSE.")
+
+play_hangman()
