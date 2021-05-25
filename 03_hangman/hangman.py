@@ -32,30 +32,43 @@ def replace_blanks(letter, word, old_blanks):
         index += 1
     return blanks
 
+hangman = {
+    '0' :   "__________\n    |\n  O_| \n /|\ \n / \ ",
+    '1' :   "__________\n     \n \O/  \n  |  \n / \ ",
+    '2' :   "__________\n     \n \O   \n  |  \n / \ ",
+    '3' :   "__________\n     \n  O   \n  |  \n / \ ",
+    '4' :   "__________\n     \n  O   \n  |  \n /   ",
+    '5' :   "__________\n     \n  O   \n  |  \n     ",
+    '6' :   "__________\n     \n  O   \n     \n     ",
+    '7' :   "__________\n     \n      \n     \n     ",
+}         
 
 word = get_word()
 message = "Guess the word: "
 blank_spaces = ''
-lives = 10
+lives = 7
 for letter_index in word:
     blank_spaces += '_'
 
 while lives > 0 and word != blank_spaces.lower():
     clear_terminal()
-    print(word)
+    #print(word)
+    print('Lives left:', lives)
+    print(hangman[str(lives)])
     letter_typed = input(message + blank_spaces + '\n  -> ')
     letter_typed = letter_typed.lower()
     if word.find(letter_typed) != -1:
         blank_spaces = replace_blanks(letter_typed, word, blank_spaces)
     else:
         lives -= 1
-        print('Lives left:', lives)
     
 clear_terminal()
 if lives > 0:
-    print("YOU WIN.")
     print('Lives left:', lives)
+    print(hangman[str(lives)])
+    print("YOU WIN.")
 else:
+    print('Lives left:', lives)
+    print(hangman[str(lives)])
     print("YOU LOSE.")
     
-
