@@ -8,9 +8,9 @@
  
 #  Projects:
 
-- [x] 1- Dice Rolling Simulator
+- [x] 1- Dice Rolling Simulator @tomasrom
 
-- [x] 2- Dictonary @cruz636
+- [x] 2- Dictonary @cruz636 @tomasrom
 
 - [x] 3- Hangman Game @tomasrom
 
