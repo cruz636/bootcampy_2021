@@ -1,7 +1,13 @@
 import random
 import os
 
-os.system('cls')
+def clear_terminal():
+    if os.name == 'nt':
+        os.system('cls')
+    elif os.name == 'posix':
+        os.system('clear')
+
+clear_terminal()
 print('\nBienvenidos al "dice rolling simulator".\n\n')
 
 dado = {
@@ -19,7 +25,10 @@ while continuar == 'y':
     lado = random.randint(1,6)
     print(dado[lado])
     continuar = input("Quiere tirar otra vez?: y/n ")
-    os.system('cls')
+    while continuar != 'y' and continuar != 'n':
+        clear_terminal()
+        continuar = input("Quiere tirar otra vez?: y/n ")
+    clear_terminal()
     if continuar == "n":
         print("Gracias por jugar, volvé cuando quieras!")
 

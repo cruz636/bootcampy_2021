@@ -2,8 +2,14 @@ import json
 import os
 from difflib import get_close_matches
 
-dic = json.load(open("data.json"))
+dictionary_data = json.load(open("data.json"))
 again = 'y'
+
+def clear_terminal():
+    if os.name == 'nt':
+        os.system('cls')
+    elif os.name == 'posix':
+        os.system('clear')
 
 def closeMatches(word, lista):
     condition = word in lista
@@ -16,23 +22,23 @@ def closeMatches(word, lista):
         condition = word in lista
     return word
 
-def search_in_dic(word):
+def search_in_dictionary_data(word):
     word = word.lower()
-    if word in dic.keys():
-        return dic[word]
+    if word in dictionary_data.keys():
+        return dictionary_data[word]
     else:
-        return dic[closeMatches(word, dic.keys())]
+        return dictionary_data[closeMatches(word, dictionary_data.keys())]
     
 while again == 'y':
-    os.system('clear')
-    palabra_ingresada = input("Type a word: ")
-    definition = search_in_dic(palabra_ingresada)
-    if type(definition) == list:
-        for i in definition:
-            print("  ->", i)
+    clear_terminal()
+    word_typed = input("Type a word: ")
+    definitions = search_in_dictionary_data(word_typed)
+    if type(definitions) == list:
+        for definition in definitions:
+            print("  ->", definition)
     else:
-        print("  ->", definition)
+        print("  ->", definitions)
     again = input("\nSearch again? [y/n] ")
     if again == "n":
-        os.system('clear')
+        clear_terminal()
         print("Gracias, vuelvas prontos.")
