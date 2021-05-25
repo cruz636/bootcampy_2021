@@ -2,7 +2,7 @@ import json
 import os
 from difflib import get_close_matches
 
-dic = json.load(open("C:/Users/Tomas/vscodeProjects/aprendiendoconara/diccionario/data.json"))
+dic = json.load(open("data.json"))
 again = 'y'
 
 def closeMatches(word, lista):
@@ -24,7 +24,7 @@ def search_in_dic(word):
         return dic[closeMatches(word, dic.keys())]
     
 while again == 'y':
-    os.system('cls')
+    os.system('clear')
     palabra_ingresada = input("Type a word: ")
     definition = search_in_dic(palabra_ingresada)
     if type(definition) == list:
@@ -34,5 +34,5 @@ while again == 'y':
         print("  ->", definition)
     again = input("\nSearch again? [y/n] ")
     if again == "n":
-        os.system('cls')
+        os.system('clear')
         print("Gracias, vuelvas prontos.")
