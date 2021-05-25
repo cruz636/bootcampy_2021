@@ -46,6 +46,7 @@ hangman = {
 word = get_word()
 message = "Guess the word: "
 blank_spaces = ''
+used_letters = ''
 lives = 7
 for letter_index in word:
     blank_spaces += '_'
@@ -54,21 +55,28 @@ while lives > 0 and word != blank_spaces.lower():
     clear_terminal()
     #print(word)
     print('Lives left:', lives)
+    print('Wrong letters:', used_letters)
     print(hangman[str(lives)])
     letter_typed = input(message + blank_spaces + '\n  -> ')
     letter_typed = letter_typed.lower()
     if word.find(letter_typed) != -1:
         blank_spaces = replace_blanks(letter_typed, word, blank_spaces)
     else:
-        lives -= 1
+        if used_letters.find(letter_typed.upper()) == -1:
+            lives -= 1
+            used_letters += letter_typed.upper() + ' '
     
 clear_terminal()
 if lives > 0:
     print('Lives left:', lives)
+    print('Wrong letters:', used_letters)
     print(hangman[str(lives)])
+    print(message + blank_spaces)
     print("YOU WIN.")
 else:
     print('Lives left:', lives)
+    print('Wrong letters:', used_letters)
     print(hangman[str(lives)])
+    print("Word:", word)
     print("YOU LOSE.")
     
